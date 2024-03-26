@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Francois+One|PT+Serif:400,400i,700,700i");
+
+body {
+  font-family: "PT Serif", sans-serif;
+  margin: 0px;
+  color: #ffffff;
+  background-color: #ecf0f1;
+  font-size: 1.1em;
+}
+
+h2 {
+  color: #2c3e50;
+}
+
