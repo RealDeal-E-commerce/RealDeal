@@ -1,22 +1,17 @@
 module.exports = (connection, DataTypes) => {
-    const Profile = connection.define(
-      "profile",
-      {
-        name:{
-          type: DataTypes.STRING,
-          allowNull: false
-        },
-
-        age:{
-          type: DataTypes.INTEGER,
-          allowNull: false
-        }
-        
+  const Profile = connection.define(
+    "profile",
+    {
+      name:{
+        type: DataTypes.STRING,
+        allowNull: false
       },
-      
-    );
-  
-    return Profile;
-  };
-  
-  module.exports =  Profile;
+      age:{
+        type: DataTypes.INTEGER,
+        allowNull: false
+      }
+    }
+  );
+
+  return Profile;
+};
