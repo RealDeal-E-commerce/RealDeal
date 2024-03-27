@@ -4,6 +4,7 @@ import axios from 'axios'
 import Login from "./components/login.jsx";
 import SingUp from "./components/singUp.jsx";
 import "../dist/style.css"
+
 const App = () => {
   const [view, setView] = useState('login');
   const [key,setKey] = useState('')
@@ -11,6 +12,7 @@ const App = () => {
   const [user,setUser] = useState({})
   const [error,setError] = useState('')
   const [isLogged,setIsLogged] = useState(false)
+   const [chatClient, setChatClient] = useState(null);
   useEffect(()=>{
     console.log('heeeeeee')
   },[isLogged])

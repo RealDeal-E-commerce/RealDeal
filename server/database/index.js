@@ -1,3 +1,4 @@
+//MPZMLG3DZYE2GWHQY3PTUSXC
 const { Sequelize, DataTypes } = require('sequelize');
 
 
@@ -65,7 +66,7 @@ const Product = sequelize.define('product', {
         allowNull: false
     },
     category: {
-        type: DataTypes.ENUM('Clothing', 'Art', 'Fashion','NFT'),
+        type: DataTypes.ENUM('Clothing', 'Art', 'Fashion'),
         allowNull: false
     },
     quantity: {
@@ -81,9 +82,7 @@ const Product = sequelize.define('product', {
         type: DataTypes.STRING,
         allowNull: true
     }
-   
-});
-
+})
 const Cart = sequelize.define('cart', {
     name: {
         type: DataTypes.STRING,
@@ -107,7 +106,7 @@ const Conversation = sequelize.define('conversation', {
     // You can add additional properties here, such as timestamps or conversation metadata
 });
 
-// Define the Message model
+
 const Message = sequelize.define('message', {
     content: {
         type: DataTypes.TEXT,
@@ -125,13 +124,13 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 
 
-// sequelize.sync({ force: true })
-//     .then(() => {
-//         console.log('Models synced with the database.')
-//     })
-//     .catch((error) => {
-//         console.error('Unable to sync models with the database: ', error)
-//     });
+sequelize.sync({ force: true })
+    .then(() => {
+        console.log('Models synced with the database.')
+    })
+    .catch((error) => {
+        console.error('Unable to sync models with the database: ', error)
+    });
  
 
 
