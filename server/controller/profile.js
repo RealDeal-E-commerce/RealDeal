@@ -5,7 +5,14 @@ module.exports = {
     
     updateProfile: async (req, res) => {
         try {
-          const profile = await profile.update(req.body, {
+          const profile = await profile.update({
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
+            email: req.body.email,
+            password: req.body.password,
+            picturePath: req.body.picturePath,
+            date: req.body.date
+          }, {
             where: { id: req.params.id },
           });
     
@@ -14,14 +21,4 @@ module.exports = {
           throw error;
         }
       },
-
-
-
-
-
-
-
-
-
-
 }
