@@ -60,9 +60,12 @@ function singUp({ singUp, changeView }) {
     };
 
     return (
-        <div className="login-form" style={{ backgroundColor:'white', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', marginTop: '-70px' }}>
+        <div className="login-form signUp" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '150vh', fontSize: '20px' }}>
             <div>
-                <h2>Sing Up</h2>
+                <div style={{
+                    fontSize: '20px',
+                    color:'white'
+                }}>Sing Up</div>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -112,7 +115,7 @@ function singUp({ singUp, changeView }) {
                     </div>
                     <Dropzone onDrop={handleImageDrop}>
                         {({ getRootProps, getInputProps }) => (
-                            <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px', border: '2px dashed #ddd', borderRadius: '5px', backgroundColor: '#f9f9f9', color: '#888', fontSize: '16px', cursor: 'pointer' }}>
+                            <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100px', border: '2px dashed #ddd', borderRadius: '5px', backgroundColor: '#f9f9f9', color: '#888', fontSize: '16px', cursor: 'pointer' }}>
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
                                     {isLoading ? (

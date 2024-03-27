@@ -1,14 +1,99 @@
-@import url("https://fonts.googleapis.com/css?family=Francois+One|PT+Serif:400,400i,700,700i");
 
-body {
-  font-family: "PT Serif", sans-serif;
-  margin: 0px;
-  color: #ffffff;
-  background-color: #ecf0f1;
-  font-size: 1.1em;
+.login-form {
+  background-color: rgb(24, 6, 24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 20px;
 }
 
-h2 {
-  color: #2c3e50;
+.login-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4b0082; /* Dark purple */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #2a0045; /* Darker shade of purple on hover */
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.signup-text {
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.login-form.singUp {
+  background-color: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 20px;
+}
+
+.singUp-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.singUp-form-group {
+  margin-bottom: 20px;
+}
+
+.singUp-form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4b0082; /* Dark purple */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #2a0045; /* Darker shade of purple on hover */
+}

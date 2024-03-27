@@ -26,10 +26,10 @@ const Login = ({changeView,login,error}) => {
     return (
         <div className="login-form" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '12px', marginTop: '-70px' }}>
             <div>
-                <h2>Login</h2>
+                <h2 style={{color:'white'}}>Login</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email" style={{color:'white'}}>Email</label>
                         <input
                             type="email"
                             id="email"
@@ -40,7 +40,7 @@ const Login = ({changeView,login,error}) => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        <label htmlFor="password" style={{color:'white'}}>Password</label>
                         <input
                             type="password"
                             id="password"
