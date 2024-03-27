@@ -65,7 +65,7 @@ const Product = sequelize.define('product', {
         allowNull: false
     },
     category: {
-        type: DataTypes.ENUM('Clothing', 'Art', 'Fashion'),
+        type: DataTypes.ENUM('Clothing', 'Art', 'Fashion','NFT'),
         allowNull: false
     },
     quantity: {
@@ -103,11 +103,26 @@ const Cart = sequelize.define('cart', {
         defaultValue: 1
     }
 });
+const Conversation = sequelize.define('conversation', {
+    // You can add additional properties here, such as timestamps or conversation metadata
+});
 
-// User.hasMany(Product);
-// Product.belongsTo(User);
-// User.hasOne(Cart);
-// Cart.belongsTo(User);
+// Define the Message model
+const Message = sequelize.define('message', {
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    }
+});
+
+User.belongsToMany(User, { as: 'participants', through: Conversation });
+Conversation.hasMany(Message);
+Message.belongsTo(Conversation);
+Message.belongsTo(User);
+User.hasMany(Product);
+Product.belongsTo(User);
+User.hasOne(Cart);
+Cart.belongsTo(User);
 
 
 // sequelize.sync({ force: true })
@@ -124,4 +139,5 @@ module.exports.Product=Product;
 module.exports.User=User;
 module.exports.Cart=Cart;
 module.exports.sequelize=sequelize;
-
+module.exports.Conversation=Conversation
+module.exports.Message=Message

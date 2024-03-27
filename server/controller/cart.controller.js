@@ -1,5 +1,5 @@
 
-const db = require('../db/index');
+const db = require('../database/index');
 
 // Create
 const createCart = async (req, res) => {
