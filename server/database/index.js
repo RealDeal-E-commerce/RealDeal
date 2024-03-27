@@ -110,13 +110,13 @@ const Cart = sequelize.define('cart', {
 // Cart.belongsTo(User);
 
 
-sequelize.sync({ force: true })
-    .then(() => {
-        console.log('Models synced with the database.')
-    })
-    .catch((error) => {
-        console.error('Unable to sync models with the database: ', error)
-    });
+// sequelize.sync({ force: true })
+//     .then(() => {
+//         console.log('Models synced with the database.')
+//     })
+//     .catch((error) => {
+//         console.error('Unable to sync models with the database: ', error)
+//     });
  
 
 

@@ -1,4 +1,5 @@
 const express = require("express");
+
 let app = express();
 const cors=require('cors')
 require ("./database/index.js")
@@ -18,21 +19,9 @@ app.use(cors())
 app.use('/api/user', UserRoute);
 // app.use('/api/product', ProductRoutes);
 // app.use('/api/cart', cartRoutes);
-app.post('/upload/image', async (req, res) => {
-  try {
-    const fileStr = req.files.file.data.toString('base64'); 
-    const uploadResponse = await cloudinary.uploader.upload("data:image/jpeg;base64," + fileStr, { 
-      upload_preset: 'ygjfen9u',
-    });
-    res.json({ imageUrl: uploadResponse.Url });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Something went wrong' });
-  }
-});
+
 let port = 3000;
-
-
+ 
 app.listen(port, function () {
   console.log(`listening on port ${port}`);
 });

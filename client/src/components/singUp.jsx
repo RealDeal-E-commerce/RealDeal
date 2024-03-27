@@ -25,23 +25,25 @@ function singUp({ singUp, changeView }) {
     };
 
     const handleImageDrop = async (acceptedFiles) => {
+        const file = acceptedFiles[0];
         const formData = new FormData();
-        formData.append('file', acceptedFiles[0]); // Make sure the file is the first item in the acceptedFiles array
+        formData.append('file', file);
+        formData.append('upload_preset', 'ygjfen9u'); 
 
         try {
-            setIsLoading(true); // Set isLoading to true when image upload starts
-            const response = await axios.post('/api/upload/', formData, {
+            setIsLoading(true);
+            const response = await axios.post('https://api.cloudinary.com/v1_1/dnirskhlb/image/upload', formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data', // Add this line
+                    'Content-Type': 'multipart/form-data',
                 },
             });
-            const imageUrl = response.data.imageUrl;
+            const imageUrl = response.data.secure_url;
             console.log(imageUrl);
             setImage(imageUrl);
-            setIsLoading(false); // Set isLoading to false when image upload is complete
+            setIsLoading(false);
         } catch (error) {
-            console.error(error);
-            setIsLoading(false); // Set isLoading to false when image upload fails
+            console.error('Error uploading image to Cloudinary:', error);
+            setIsLoading(false);
         }
     };
 
@@ -51,14 +53,14 @@ function singUp({ singUp, changeView }) {
     };
 
     const handleSignUp = () => {
-        if (!image) { 
+        if (image) { 
             singUp({ name, password, email, role, image });
             changeView('login');
         }
     };
 
     return (
-        <div className="login-form" style={{ backgroundColor:'purple', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', marginTop: '-70px' }}>
+        <div className="login-form" style={{ backgroundColor:'white', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '20px', marginTop: '-70px' }}>
             <div>
                 <h2>Sing Up</h2>
                 <form onSubmit={handleSubmit}>
@@ -122,7 +124,7 @@ function singUp({ singUp, changeView }) {
                             </section>
                         )}
                     </Dropzone>
-                    <button type="button" className="btn btn-secondary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'purle', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }} onClick={handleSignUp} >Sign Up</button>
+                    <button type="button" className="btn btn-secondary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'dark purple', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }} onClick={handleSignUp} >Sign Up</button>
                 </form>
             </div>
         </div>
