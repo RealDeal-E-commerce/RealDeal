@@ -9,7 +9,7 @@ async function sendMessage(req, res) {
     let conversation = await Conversation.findOrCreate({
       where: {
         userId: senderId,
-        sellerId: recipientId
+        clientId: recipientId
       }
     });
 

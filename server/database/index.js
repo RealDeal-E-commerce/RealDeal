@@ -32,7 +32,7 @@ const User = sequelize.define('user', {
         unique: true
     },
     role: {
-        type: DataTypes.ENUM('user', 'seller'),
+        type: DataTypes.ENUM('client','fashionDesigner','admin'),
         allowNull: false
     },
     image: {
@@ -40,6 +40,7 @@ const User = sequelize.define('user', {
         allowNull: true
     }
 });
+
 
 
 const Product = sequelize.define('product', {
@@ -78,7 +79,7 @@ const Product = sequelize.define('product', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    seller: {
+    fashionDesigner: {
         type: DataTypes.STRING,
         allowNull: true
     }
@@ -108,10 +109,18 @@ const Conversation = sequelize.define('conversation', {
 
 
 const Message = sequelize.define('message', {
-    content: {
+    senderId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      receiverId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      content: {
         type: DataTypes.TEXT,
         allowNull: false
-    }
+      }
 });
 
 User.belongsToMany(User, { as: 'participants', through: Conversation });
@@ -124,13 +133,13 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 
 
-sequelize.sync({ force: true })
-    .then(() => {
-        console.log('Models synced with the database.')
-    })
-    .catch((error) => {
-        console.error('Unable to sync models with the database: ', error)
-    });
+// sequelize.sync({ force: true })
+//     .then(() => {
+//         console.log('Models synced with the database.')
+//     })
+//     .catch((error) => {
+//         console.error('Unable to sync models with the database: ', error)
+//     });
  
 
 

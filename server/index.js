@@ -9,6 +9,7 @@ const http = require('http');
 const server = http.createServer(app);
 const cartRoutes=require("./routes/Cart.routes.js")
 const ProductRoutes=require("./routes/Product.routes.js")
+const chatRoutes=require("./routes/chat.routes.js")
 const io = socketIo(server);
 // const Twilio = require('twilio');
 // const cloudinary = require('cloudinary').v2;
@@ -18,22 +19,19 @@ const fileUpload = require('express-fileupload');
 //   api_key: '923833964889333', 
 //   api_secret: 'w5jbvyj66Jt-pJu09V-NuZp5iS0' 
 // });
-// const twilioClient = new Twilio('ACfe2e5341f69661b71a24d6545e492967', 'fbf08e47dd5ed23b79b71c0dd9a9cf66');
 io.on('connection', (socket) => {
-  console.log('A client has connected.');
-
-  // Handle events such as 'message', 'disconnect', etc.
-  socket.on('message', (data) => {
-    console.log('Received message:', data);
-    // Broadcast the message to all connected clients
-    io.emit('message', data);
-  });
+  console.log('New client connected');
 
   socket.on('disconnect', () => {
-    console.log('A client has disconnected.');
-  })
-})
+    console.log('Client disconnected');
+  });
 
+  // Handle message events
+  socket.on('sendMessage', (message) => {
+    // Broadcast the message to all connected clients
+    io.emit('receiveMessage', message);
+  });
+});
 app.use(fileUpload());
 app.use(express.static(__dirname + "/../client/dist"));
 app.use(express.json());
@@ -41,7 +39,7 @@ app.use(cors())
 app.use('/api/user', UserRoute);
 app.use('/api/product', ProductRoutes);
 app.use('/api/cart', cartRoutes);
-
+app.use('/api/messages',chatRoutes)
 let port = 3000;
  
 app.listen(port, function () {

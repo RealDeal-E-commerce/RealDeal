@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import axios from 'axios'
 import Login from "./components/login.jsx";
 import SingUp from "./components/singUp.jsx";
+
+import Homepage from "./components/Homepage.jsx";
 import "../dist/style.css"
 
 const App = () => {
@@ -12,7 +14,7 @@ const App = () => {
   const [user,setUser] = useState({})
   const [error,setError] = useState('')
   const [isLogged,setIsLogged] = useState(false)
-   const [chatClient, setChatClient] = useState(null);
+  //  const [chatClient, setChatClient] = useState(null);
   useEffect(()=>{
     console.log('heeeeeee')
   },[isLogged])
@@ -20,6 +22,9 @@ const App = () => {
     setKey(key)
     setId(id)
     setView(option)
+    if (option === 'homepage') {
+      setUser(data.user);
+  }
   };
 
 
@@ -36,6 +41,7 @@ const App = () => {
       // setView('main')
       setError('')
       setIsLogged(true)
+      changeView('homepage', { user: res.data.user });
       console.log(isLogged)
       return res
   }).catch((err)=>{
@@ -53,9 +59,11 @@ const logout = ()=>{
 
   return (
     <div >
+   
       {/* <Navbar style={{ width: '65%' }} logout={logout} user={user} isLogged={isLogged} changeView={changeView} /> */}
       {view === 'login' && <Login error={error} login={login} changeView={changeView} />}
       {view === 'singup' && <SingUp  changeView={changeView} singUp={singUp}/>}
+      {view === 'homepage' && <Homepage user={user} />}
       {/* <FooTer /> */}
     </div>
   );

@@ -1,3 +1,57 @@
+.dark-text{
+  font-family: "PT Serif", sans-serif;
+  margin: 0px;
+  color: #fffaff;
+  background-color:rgb(50, 7, 72);
+  background-image:
+  radial-gradient(at 36% 14%, rgb(37, 0, 45) 1px, transparent 50%),
+  radial-gradient(at 80% 0%, rgb(59, 1, 110) 1px, transparent 50%),
+   radial-gradient(at 0% 50%, rgb(45, 0, 60) 1px, transparent 50%),
+   radial-gradient(at 36% 14%, rgb(37, 0, 45) 1px, transparent 50%),
+   radial-gradient(at 80% 0%, rgb(59, 1, 110) 1px, transparent 50%),
+    radial-gradient(at 0% 50%, rgb(45, 0, 60) 1px, transparent 50%),
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.footer-section {
+  text-align: left;
+  flex: 1;
+}
+
+.footer-section h3 {
+  margin: 0;
+}
+
+.footer-links {
+  text-align: right;
+  flex: 1;
+}
+
+.footer-links h3 {
+  text-align: right;
+}
+
+.footer-links p {
+  text-align: right;
+}
+
+.footer-icon {
+  margin: 10px;
+}
+
+.body {
+  font-family: "PT Serif", sans-serif;
+  margin: 0px;
+color: #ffffff;
+  background-color:rgb(32, 1, 48);
+  font-size: 1.1em;
+}
 
 .login-form {
   background-color: rgb(24, 6, 24);
@@ -96,4 +150,45 @@
 
 .btn-secondary:hover {
   background-color: #2a0045; /* Darker shade of purple on hover */
+}
+
+/* ////////////////nav/////////////////// */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333;
+  color: #fff;
+}
+
+.navbar-item {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-item:hover {
+  background-color: #555;
+}
+
+.input {
+  width: 300px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
 }

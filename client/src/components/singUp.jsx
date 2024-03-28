@@ -6,7 +6,7 @@ function singUp({ singUp, changeView }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setname] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState('fashionDesigner');
     const [image, setImage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const handleEmailChange = (e) => {
@@ -98,8 +98,8 @@ function singUp({ singUp, changeView }) {
                             required
                             className="form-control"
                         >
-                            <option value="seller">Seller</option>
-                            <option value="user">User</option>
+                            <option value="fashionDesigner">Fashion Designer</option>
+                            <option value="client">Client</option>
                         </select>
                     </div>
                     <div className="form-group">
