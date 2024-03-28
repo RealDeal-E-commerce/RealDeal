@@ -1,19 +1,16 @@
+const mysql = require('mysql2');
 const { Sequelize, DataTypes } = require('sequelize');
+
 
 // Create a new Sequelize instance
 const sequelize = new Sequelize('blogs', 'root', 'rootroot', {
     host: 'localhost',
     dialect: 'mysql',
+
+
 });
 
-// connection check :
-sequelize.authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.')
-    })
-    .catch((error) => {
-        console.error('Unable to connect to the database: ', error)
-    })
+
 
 // Define the User model
 const User = sequelize.define('user', {
@@ -132,14 +129,26 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 
 
-sequelize.sync({ force: true })
-    .then(() => {
-        console.log('Models synced with the database.')
-    })
-    .catch((error) => {
-        console.error('Unable to sync models with the database: ', error)
-    });
+// sequelize.sync({ force: true })
+
  
+
+async function connectionTest (){     
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+  }
+  connectionTest()
+
+//   const db={}
+
+// db.Products=require('./Fashionshows.model')(connection,DataTypes)
+
+
+// sequelize.sync({force:true}) 
 
 
 module.exports.Product=Product;
@@ -148,3 +157,7 @@ module.exports.Cart=Cart;
 module.exports.sequelize=sequelize;
 module.exports.Conversation=Conversation
 module.exports.Message=Message
+
+
+
+

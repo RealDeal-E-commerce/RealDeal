@@ -1,0 +1,176 @@
+/* @import "~bootstrap-icons/font/bootstrap-icons.css";
+
+body {
+  background-color: hsla(280, 33%, 46%, 1);
+  background-image: radial-gradient(at 36% 14%, hsla(266, 22%, 36%, 1) 0px, transparent 50%),
+                    radial-gradient(at 80% 0%, hsla(189, 53%, 11%, 1) 0px, transparent 50%),
+                    radial-gradient(at 0% 50%, hsla(355, 44%, 15%, 1) 0px, transparent 50%),
+                    radial-gradient(at 84% 85%, hsla(229, 74%, 12%, 1) 0px, transparent 50%),
+                    radial-gradient(at 0% 100%, hsla(360, 29%, 24%, 1) 0px, transparent 50%),
+                    radial-gradient(at 4% 14%, hsla(360, 47%, 27%, 1) 0px, transparent 50%);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 300px;
+  height: 400px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #3f3f3f;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #666;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.title {
+  color: white; 
+  font-size: 40px; 
+  font-weight: bold; 
+}
+
+.live-now {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.title-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.live-now-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.showing {
+  font-size: 14px;
+  color: rgba(128, 128, 128, 0.5);
+  margin-right: 10px;
+}
+
+.title-container, .showing {
+  position: absolute;
+  left: 0;
+}
+
+.title-container {
+  top: 0;
+}
+
+.showing {
+  bottom: 5;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: white;
+  margin-right: 5px;
+}
+
+.logo-wrapper {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.custom-button {
+  background-color: #164dac;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.custom-button:hover {
+  transform: translateY(-2px);
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+}
+
+.live {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-img-top {
+  width: calc(100%);
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.people {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+}
+ */
