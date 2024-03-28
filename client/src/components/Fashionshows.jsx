@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import style from "../css/Fashionshows.css";
+import "../css/Fashionshows.css";
 
 export default function Allnft() {
   const [fashionshows, setFashionshows] = useState([]);
