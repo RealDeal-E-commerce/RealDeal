@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 import $ from 'jquery'
 import List from './components/List.jsx'
-
+import Fashionshows from "./components/Fashionshows.jsx"
+import Upcomingshows from "./components/Upcomingshows.jsx"
+import Previousshows from "./components/Previousshows.jsx"
 const App = () => {
   const [items, setItems] = useState([])
   useEffect(() => {
@@ -20,8 +22,14 @@ const App = () => {
 
   return (
     <div>
-      <h1>Item List</h1>
-      <List items={items} />
+       <Fashionshows/>
+
+      <Upcomingshows/>
+
+      <Previousshows/>
+     
+
+
     </div>
   )
 }
