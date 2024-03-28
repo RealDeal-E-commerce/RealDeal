@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Create a new Sequelize instance
-const sequelize = new Sequelize('commerce', 'root', 'rootroot', {
+const sequelize = new Sequelize('blogs', 'root', 'rootroot', {
     host: 'localhost',
     dialect: 'mysql',
 });
@@ -17,62 +17,31 @@ sequelize.authenticate()
 
 // Define the User model
 const User = sequelize.define('user', {
-    FirstName:{
-        type:DataTypes.STRING,
+    name: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    LastName:{
-        type:DataTypes.STRING,
-        
+    password: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    Email:{
-        type:DataTypes.STRING,
+    email: {
+        type: DataTypes.STRING,
         allowNull: false,
-        unique:true,
+        unique: true
     },
-    Password:{
-        type:DataTypes.STRING,
-       
+    role: {
+        type: DataTypes.ENUM('client','fashionDesigner','admin'),
         allowNull: false
     },
-    Role: {
-        type: DataTypes.ENUM('Client', 'Fashion designer'),
-        allowNull: false
-    },
-    PicturePath:{
-        type:DataTypes.STRING,
-        defaultValue:"",
-    },
-    Followe:{
-        type:DataTypes.JSON,
-        defaultValue:[],
-    },
-    Date:{
-        type:DataTypes.JSON,
-        defaultValue:[],
-    },
+    image: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
 });
 
-const Post=sequelize.define('post',{
 
-        FirstName:DataTypes.STRING,
-            
-        LastName:DataTypes.STRING,
-        description:DataTypes.STRING,
-        picturePath:DataTypes.STRING,
-        userpicturePath:DataTypes.STRING,
-        likes:{
-           type:Map,
-           of:Boolean
-        },
-        comment:{
-            type:DataTypes.JSON,
-            defaultValue:[]
-        }
-    
-})
-// Define the Product model
+
 const Product = sequelize.define('product', {
     name: {
         type: DataTypes.STRING,
@@ -92,17 +61,12 @@ const Product = sequelize.define('product', {
         allowNull: false,
         defaultValue: []
     },
-    sizes: {
-        type: DataTypes.JSON,
-        allowNull: false,
-        defaultValue: []
-    },
     image: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    gender: {
-        type: DataTypes.ENUM('men', 'women', 'kids'),
+    category: {
+        type: DataTypes.ENUM('Clothing', 'Art', 'Fashion'),
         allowNull: false
     },
     quantity: {
@@ -114,10 +78,11 @@ const Product = sequelize.define('product', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    
-});
-
-
+    fashionDesigner: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
+})
 const Cart = sequelize.define('cart', {
     name: {
         type: DataTypes.STRING,
@@ -137,42 +102,49 @@ const Cart = sequelize.define('cart', {
         defaultValue: 1
     }
 });
-const Admin = sequelize.define('admin', {
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    
+const Conversation = sequelize.define('conversation', {
+    // You can add additional properties here, such as timestamps or conversation metadata
 });
 
-// Establish the association between User and Product
 
+const Message = sequelize.define('message', {
+    senderId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      receiverId: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+      },
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+      }
+});
+
+User.belongsToMany(User, { as: 'participants', through: Conversation });
+Conversation.hasMany(Message);
+Message.belongsTo(Conversation);
+Message.belongsTo(User);
+User.hasMany(Product);
+Product.belongsTo(User);
 User.hasOne(Cart);
 Cart.belongsTo(User);
-User.hasMany(Post);
-Post.belongsTo(User);
-Admin.hasMany(Post);
-Post.belongsTo(Admin);
 
-// Sync the models with the database
-// sequelize.sync({ force: true })
-//     .then(() => {
-//         console.log('Models synced with the database.')
-//     })
-//     .catch((error) => {
-//         console.error('Unable to sync models with the database: ', error)
-//     });
+
+sequelize.sync({ force: true })
+    .then(() => {
+        console.log('Models synced with the database.')
+    })
+    .catch((error) => {
+        console.error('Unable to sync models with the database: ', error)
+    });
  
 
 
 module.exports.Product=Product;
 module.exports.User=User;
 module.exports.Cart=Cart;
-module.exports.Post=Post;
-module.exports.Admin=Admin;
-
+module.exports.sequelize=sequelize;
+module.exports.Conversation=Conversation
+module.exports.Message=Message
