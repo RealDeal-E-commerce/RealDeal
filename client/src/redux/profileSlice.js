@@ -11,8 +11,8 @@ const profileSlice = createSlice({
     initialState:{
         isLoading:false,
         data:null,
-        error:false
+        error:false 
     }
 })
 
-export default profileSlice;
+export default profileSlice.reducer;

@@ -44,7 +44,7 @@ const User = sequelize.define('user', {
         type:DataTypes.STRING,
         defaultValue:"",
     },
-    Followe:{
+    Followers:{
         type:DataTypes.JSON,
         defaultValue:[],
     },
