@@ -32,7 +32,9 @@ const App = () => {
 
   return (
     <div>
-      <Allnft/>
+      <Explore/>
+      <Fashionshows/>
+      <Previousshows/>
 
     </div>
   );
