@@ -2,29 +2,30 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
 module.exports=(sequelize,DataTypes)=>{
-  const porducts = sequelize.define('prod', {
+  const explore = sequelize.define('exp', {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
     },
-    time: {
-      type: DataTypes.STRING,
-      allowNull: false
+    imgP: {
+        type: DataTypes.STRING,
+        allowNull :false,
     },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    showing: {
+    name: {
+            type: DataTypes.STRING,
+            
+          },
+      
+      imgB: {
+        type: DataTypes.STRING,
+        allowNull :false
+      },
+    description: {
       type: DataTypes.STRING,
       
     },
-    imgUrl: {
-      type: DataTypes.STRING,
-      allowNull :false
-    },
   });
-  return porducts
+  return explore
 }

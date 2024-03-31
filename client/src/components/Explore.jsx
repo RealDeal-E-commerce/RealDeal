@@ -21,8 +21,16 @@ export default function Explore() {
   return (
     <div>
       <div className="title-container">
-        <h2 className="title">Fashion Shows</h2>
+        <h2 className="titlee">Explore Collections</h2>
       </div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
       <div className="buttons-container">
         <button className="button">Trending</button>
         <button className="button">All Fashion NFTs</button>

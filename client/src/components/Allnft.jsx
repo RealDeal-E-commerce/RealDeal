@@ -91,7 +91,7 @@ export default function Allnft() {
                             <button 
                               type="button" 
                               className="btn btn-primary btn-sm buy-now-button" 
-                              onClick={() => handleBuyNow(nft.price)}
+                              onClick={() => handleBuyNow(nft.price)} // Pass the price as amount
                             >
                               Buy Now
                             </button>
