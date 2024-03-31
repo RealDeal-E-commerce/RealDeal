@@ -109,14 +109,6 @@ const Conversation = sequelize.define('conversation', {
 
 
 const Message = sequelize.define('message', {
-    senderId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      receiverId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
       content: {
         type: DataTypes.TEXT,
         allowNull: false
@@ -124,9 +116,11 @@ const Message = sequelize.define('message', {
 });
 
 User.belongsToMany(User, { as: 'participants', through: Conversation });
+Conversation.belongsToMany(User, { as: 'participants', through: 'ConversationParticipants' });
 Conversation.hasMany(Message);
 Message.belongsTo(Conversation);
-Message.belongsTo(User);
+Message.belongsTo(User, { as: 'sender' });
+User.hasMany(Message);
 User.hasMany(Product);
 Product.belongsTo(User);
 User.hasOne(Cart);

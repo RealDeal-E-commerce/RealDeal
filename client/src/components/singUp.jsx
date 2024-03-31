@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 
-function singUp({ singUp, changeView }) {
+function signUp({ singUp, changeView }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setname] = useState('');
@@ -134,4 +134,4 @@ function singUp({ singUp, changeView }) {
     );
 };
 
-export default singUp;
+export default signUp;

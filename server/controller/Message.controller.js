@@ -1,51 +1,27 @@
-const { Message, Conversation } = require('../database/index');
+const { User, Message, Conversation } = require('../database/index');
 
+async function startConversation(participantIds) {
+    const conversation = await Conversation.create();
+    await conversation.addParticipants(participantIds);
+    return conversation;
+}
 
-async function sendMessage(req, res) {
-  try {
-    const { senderId, recipientId, content } = req.body;
-
-    
-    let conversation = await Conversation.findOrCreate({
-      where: {
-        userId: senderId,
-        clientId: recipientId
-      }
-    });
-
-    // Create the message
+async function sendMessage(conversationId, senderId, content) {
     const message = await Message.create({
-      content,
-      userId: senderId,
-      conversationId: conversation.id
+        senderId,
+        conversationId,
+        content,
     });
-
-
-    res.status(201).json({ message });
-  } catch (error) {
-    console.error('Error sending message:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    return message;
 }
 
-
-async function fetchMessages(req, res) {
-  try {
-    const conversationId = req.params.conversationId;
-
+async function getMessages(conversationId) {
     const messages = await Message.findAll({
-      where: { conversationId },
-      include: ['sender'] 
+        where: { conversationId },
+        include: [{ model: User, as: 'sender', attributes: ['id', 'name'] }],
+        order: [['createdAt', 'ASC']],
     });
-
-    res.json({ messages });
-  } catch (error) {
-    console.error('Error fetching messages:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    return messages;
 }
 
-module.exports = {
-  sendMessage,
-  fetchMessages
-};
+module.exports = { startConversation, sendMessage, getMessages };
