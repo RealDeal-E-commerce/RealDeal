@@ -11,7 +11,6 @@ import Allnft from "./components/Allnft.jsx";
 import Payment from "./components/Payment.jsx";
 import Success from './components/Success.jsx';
 import Fail from './components/Fail.jsx';
-// Define Success and Fail components here if not already defined
 
 
 
