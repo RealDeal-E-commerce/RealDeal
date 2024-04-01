@@ -57,6 +57,4 @@ UpdateOne :async (req, res) => {
 
 } 
 }
-
-  }
-
+}

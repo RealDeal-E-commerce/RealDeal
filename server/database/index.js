@@ -21,9 +21,7 @@ async function connectionTest (){
 
 db.Products=require('./Fashionshows.model')(connection,DataTypes)
 db.Explore=require('./Explore.model')(connection,DataTypes)
-db.Allnft=require('./Allnft.model')(connection,DataTypes)
-
-
+db.Allnft=require('./allnft.model')(connection,DataTypes)
 
  //connection.sync({force:true}) 
 
