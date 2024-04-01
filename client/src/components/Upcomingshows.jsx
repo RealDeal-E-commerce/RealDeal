@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../css/Upcomingshows.css";
+import style from "../css/Upcomingshows.css";
 
-export default function Allnft() {
+export default function Upcomingshows() {
   const [previousshows, setPreviousshows] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/product/");
+        const response = await axios.get("http://localhost:3000/api/shows/");
         setPreviousshows(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
