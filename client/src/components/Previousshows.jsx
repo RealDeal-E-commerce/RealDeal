@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../css/Upcomingshows.css";
+import style from "../css/Upcomingshows.css";
 
 export default function Allnft() {
   const [upcomingshows, setUpcomingshows] = useState([]);
@@ -8,7 +8,7 @@ export default function Allnft() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/product/");
+        const response = await axios.get("http://localhost:3000/api/shows/");
         setUpcomingshows(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);

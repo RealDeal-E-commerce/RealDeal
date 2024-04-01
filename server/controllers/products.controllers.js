@@ -1,12 +1,12 @@
 const db = require('../database/index')
-const axios = require('axios')
+
 
 
 module.exports = { 
 
 selectAll :async function(req,res){
     try {
-        const product= await db.Products.findAll({})
+        const product= await db.Product.findAll({})
         res.status(200).send(product)
         
     } catch (error) {
@@ -17,7 +17,7 @@ selectAll :async function(req,res){
     },   
 selectOne: async function(req, res) {
     try {
-        const product = await db.Products.findOne({ where: { id: req.params.id } })
+        const product = await db.Product.findOne({ where: { id: req.params.id } })
             res.status(200).json(product);
     
     } catch (error) {
@@ -27,7 +27,7 @@ selectOne: async function(req, res) {
     },
 addOne:async function(req,res){
     try {
-        const product = await db.Products.create(req.body)
+        const product = await db.Product.create(req.body)
     
     res.status(201).send(product)
     } catch (error) {
@@ -36,7 +36,7 @@ addOne:async function(req,res){
     },
 deleteOne:async (req, res) => {
     try {
-    const product = await db.Products.destroy({
+    const product = await db.Product.destroy({
         where: { id: req.params.id },
     })
 
@@ -47,7 +47,7 @@ deleteOne:async (req, res) => {
     },
 UpdateOne :async (req, res) => {
     try {
-    const product = await db.Products.update(req.body, {
+    const product = await db.Product.update(req.body, {
         where: { id: req.params.id },
     })
 
@@ -56,5 +56,20 @@ UpdateOne :async (req, res) => {
     throw error
 
 } 
+},
+searchProducts : async (req, res) => {
+    try {
+        const { search } = req.params;
+        const products = await db.Product.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${search}%`
+                }
+            }
+        });
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 }
 }

@@ -8,28 +8,28 @@ function FooTer() { // Remove 'year' from props
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
        <div style={{ textAlign: 'left' }}>
           <h3>Logo</h3>
-          <p>lorem ipsum dolor sit amet,</p>
-          <p>consectetur adipiscing elit.</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>lorem ipsum dolor sit amet,</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>consectetur adipiscing elit.</p>
          
         </div>
         <div style={{ textAlign: 'center' }}>
           <h3>About</h3>
-          <p>Product</p>
-          <p>Resource</p>
-          <p>Term & condition</p>
-          <p>FAQ</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Product</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Resource</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Term & condition</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>FAQ</p>
         </div>
         <div style={{ textAlign: 'center' }}>
           <h3>Company</h3>
-          <p>Our Team</p>
-          <p>Partner with Us</p>
-          <p>Privacy & Policy</p>
-          <p>Features</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Our Team</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Partner with Us</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Privacy & Policy</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>Features</p>
         </div>
         <div style={{ textAlign: 'right' }}>
           <h3>Contact</h3>
-          <p>+012 3456789</p>
-          <p>adorableprogrammer@gmail.com</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>+012 3456789</p>
+          <p style={{ color: 'grey-dark', opacity: 0.5 }}>adorableprogrammer@gmail.com</p>
           <Footer.LinkGroup>
             <FaInstagram style={{ margin: '10px' }} className="icon" size={20} /> {/* Instagram Icon */}
             <FaDiscord style={{ margin: '10px' }} className="icon" size={20} /> {/* Discord Icon */}

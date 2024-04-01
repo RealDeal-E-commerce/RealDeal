@@ -10,7 +10,15 @@ const sequelize = new Sequelize('blogs', 'root', 'rootroot', {
 
 });
 
-
+async function connectionTest (){     
+    try {
+      await sequelize.authenticate();
+      console.log('Connection has been established successfully.');
+    } catch (error) {
+      console.error('Unable to connect to the database:', error);
+    }
+    }
+    connectionTest()
 
 // Define the User model
 const User = sequelize.define('user', {
@@ -59,7 +67,7 @@ const Product = sequelize.define('product', {
         defaultValue: []
     },
     image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     category: {
@@ -102,7 +110,21 @@ const Cart = sequelize.define('cart', {
 const Conversation = sequelize.define('conversation', {
     // You can add additional properties here, such as timestamps or conversation metadata
 });
-
+const Post = sequelize.define('post', {
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    content: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    },
+    image: {
+        type: DataTypes.TEXT,
+        allowNull: false
+    }
+   
+});
 
 const Message = sequelize.define('message', {
     senderId: {
@@ -118,6 +140,87 @@ const Message = sequelize.define('message', {
         allowNull: false
       }
 });
+const allnft = sequelize.define('nft', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    UncommenRare: {
+        type: DataTypes.INTEGER,
+        allowNull :false,
+    },
+    price: {
+            type: DataTypes.INTEGER,
+            
+          },
+      
+      imgUrl: {
+        type: DataTypes.STRING,
+        allowNull :false
+      },
+      genre: {
+      type: DataTypes.STRING,
+      
+    },
+    status: {
+        type: DataTypes.STRING,
+        
+      },
+      comingSoon: {
+        type: DataTypes.STRING,
+        
+      },
+  });
+  
+  const explore = sequelize.define('exp', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    imgP: {
+        type: DataTypes.STRING,
+        allowNull :false,
+    },
+    name: {
+            type: DataTypes.STRING,
+            
+          },
+      
+      imgB: {
+        type: DataTypes.STRING,
+        allowNull :false
+      },
+    description: {
+      type: DataTypes.STRING,
+      
+    },
+  });
+
+  const shows = sequelize.define('shows', {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    time: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    showing: {
+      type: DataTypes.STRING,
+      
+    },
+    imgUrl: {
+      type: DataTypes.STRING,
+      allowNull :false
+    },
+  });
+
 
 User.belongsToMany(User, { as: 'participants', through: Conversation });
 Conversation.hasMany(Message);
@@ -127,21 +230,15 @@ User.hasMany(Product);
 Product.belongsTo(User);
 User.hasOne(Cart);
 Cart.belongsTo(User);
+User.hasMany(Post);
+Post.belongsTo(User);
 
 
 // sequelize.sync({ force: true })
 
  
 
-async function connectionTest (){     
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-  }
-  connectionTest()
+
 
 //   const db={}
 
@@ -157,7 +254,10 @@ module.exports.Cart=Cart;
 module.exports.sequelize=sequelize;
 module.exports.Conversation=Conversation
 module.exports.Message=Message
-
+module.exports.Post=Post
+module.exports.Allnft=allnft
+module.exports.explore=explore
+module.exports.shows=shows
 
 
 

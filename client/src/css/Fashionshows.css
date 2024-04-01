@@ -1,4 +1,4 @@
-/* @import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 body {
   background-color: hsla(280, 33%, 46%, 1);
@@ -156,6 +156,16 @@ body {
   height: auto;
   object-fit: cover;
 }
+.live-icon {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+
+}
 
 .card-img-top {
   width: calc(100%);
@@ -198,4 +208,28 @@ body {
 
 .button-container {
   text-align: center;
-} */
+}
+
+.people-icon {
+  position: absolute;
+  top: 0;
+  right: 200px;
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+  padding-right: 15px;
+  padding-left: 15px;
+  box-sizing: border-box;
+}
