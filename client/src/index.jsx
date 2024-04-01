@@ -12,7 +12,7 @@ import Fashionshows from "./components/Fashionshows.jsx"
 import Upcomingshows from "./components/Upcomingshows.jsx"
 import Previousshows from "./components/Previousshows.jsx"
 
-const App = () => {
+ const App = () => {
   const user = {
     name: "John Doe", // Sample user data
     image: "profile.jpg" // Sample user data
@@ -22,6 +22,7 @@ const App = () => {
     <div>
 
       <Homepage user={user} /> {/* Pass user prop to the Homepage component */}
+
 
        {/* <Fashionshows/>
 

@@ -225,3 +225,122 @@ body {
   padding: 10px; /* Add padding to create a box around the title */
   /* border: 3.1px solid #ccc;  */
 }
+.groupes {
+  max-width: 600px; /* Adjust the max-width as desired */
+  margin: 0 auto;
+  padding: 10px; /* Adjust padding as desired */
+}
+
+.groupes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin: 0;
+}
+
+.grp-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.grp-container .grp1,
+.grp-container .grp2,
+.grp-container .grp3 {
+  flex-basis: calc(33.33% - 20px);
+  margin-bottom: 20px;
+}
+
+.grp-container .grp1 img,
+.grp-container .grp2 img,
+.grp-container .grp3 img {
+  max-width: 100%;
+  height: auto;
+}
+
+.name,
+.view {
+  margin: 5px 0;
+  color: white;
+}
+
+.btn-grp1,
+.btn-grp2,
+.btn-grp3,
+.btn-see-all {
+  background-color: rgba(108, 93, 211, 1);
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-grp1:hover,
+.btn-grp2:hover,
+.btn-grp3:hover,
+.btn-see-all:hover {
+  background-color: rgba(108, 93, 211, 0.8);
+}
+
+.btn-see-all {
+  padding: 6px 12px; /* Adjust padding as desired */
+  font-size: 20px; /* Adjust font-size as desired */
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .grp-container .grp1,
+  .grp-container .grp2,
+  .grp-container .grp3 {
+    flex-basis: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  .grp-container .grp1,
+  .grp-container .grp2,
+  .grp-container .grp3 {
+    flex-basis: calc(100% - 20px);
+  }
+}
+
+.img-grp1{
+  width: 49.37px;
+  height: 46.25px;
+  top: 1611.67px;
+  left: 218px;
+  gap: 0px;
+  opacity: 0px;
+}
+.img-grp2{
+  width: 49.37px;
+  height: 46.25px;
+  top: 1611.67px;
+  left: 218px;
+  gap: 0px;
+  opacity: 0px;
+}
+.img-grp3{
+  width: 49.37px;
+  height: 46.25px;
+  top: 1611.67px;
+  left: 218px;
+  gap: 0px;
+  opacity: 0px;
+}
+
+.frame {
+  border: 2px solid rgba(108, 93, 211, 1);
+  padding: 20px;
+  border-radius: 10px;
+  width: 800px;
+  margin: 0 auto;
+  margin-left: 20px;
+}
+
