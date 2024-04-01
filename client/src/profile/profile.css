@@ -181,7 +181,7 @@ body {
 }
 
   .form-select {
-    max-width: 120px; /* Adjust the max-width as needed */
+
     height: 40px; /* Fixed height */
     top: 1537px;
     left: 392px;
@@ -223,5 +223,5 @@ body {
   text-align: left;
   background: rgba(255, 255, 255, 1);
   padding: 10px; /* Add padding to create a box around the title */
-  border: 3.1px solid #ccc; /* Add a border */
+  /* border: 3.1px solid #ccc;  */
 }
