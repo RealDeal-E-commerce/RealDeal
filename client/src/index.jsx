@@ -9,7 +9,7 @@ import "../dist/style.css";
 import { io } from 'socket.io-client';
 import ChatComponent from './components/ChatComponent.jsx'
 import { data } from 'jquery';
-const socket = io("http://localhost:3000" ,{ autoConnect: false }); // Make sure your backend is running on this port
+// const socket = io("http://localhost:3000" ,{ autoConnect: false }); // Make sure your backend is running on this port
 
 const App = () => {
   const [message, setMessage] = useState('');
@@ -22,16 +22,16 @@ const App = () => {
 const [data,setData]=useState({})
   useEffect(() => {
     // Listen for incoming messages only if logged in
-    if (isLogged) {
-      socket.on('receiveMessage', (message) => {
-        setMessages(messages => [...messages, message]);
-      });
+    // if (isLogged) {
+    //   socket.on('receiveMessage', (message) => {
+    //     setMessages(messages => [...messages, message]);
+    //   });
 
-      // Cleanup to avoid multiple listeners being attached on re-renders
-      return () => {
-        socket.off('receiveMessage');
-      };
-    }
+    //   // Cleanup to avoid multiple listeners being attached on re-renders
+    //   return () => {
+    //     socket.off('receiveMessage');
+    //   };
+    // }
   }, [isLogged]); // Dependency on isLogged to setup or remove socket listeners based on user's logged-in state
 
   
@@ -53,8 +53,8 @@ const [data,setData]=useState({})
       content: message,
     };
   
-    socket.emit('sendMessage', messageData);
-    setMessage(''); // Clear message input after sending
+    // socket.emit('sendMessage', messageData);
+    // setMessage(''); // Clear message input after sending
   };
   // Example function to fetch messages for a conversation
   const fetchMessagesForConversation = async (conversationId) => {
@@ -77,12 +77,12 @@ const [data,setData]=useState({})
     axios.post('http://localhost:3000/api/user/', obj)
     .then((res) => {
       const userData = res.data.user;
-      const token = res.data.token;
+      // const token = res.data.token;
   
       // Save the token and user ID to local storage
-      const storedTokens = JSON.parse(localStorage.getItem('tokens')) || {};
-      storedTokens[userData.id] = token;
-      localStorage.setItem('tokens', JSON.stringify(storedTokens));
+      // const storedTokens = JSON.parse(localStorage.getItem('tokens')) || {};
+      // storedTokens[userData.id] = token;
+      // localStorage.setItem('tokens', JSON.stringify(storedTokens));
   
         setIsLogged(true);
         changeView('homepage', userData);
@@ -95,7 +95,8 @@ const [data,setData]=useState({})
     const changeView = (option, userData) => {
       setView(option);
       if (option === 'homepage') {
-        setUser(userData); // Assuming userData is the user object you want to set
+        setUser(userData); 
+        console.log(userData);
       }
     };
     
@@ -122,9 +123,7 @@ const [data,setData]=useState({})
           <button onClick={goToChatView}>Go to Chat</button>
         </div>
       )}
-   {view === 'chat' && (
-  <ChatComponent user={user}  />
-)}
+     {view === 'chat' && <ChatComponent user={user} />}
     </div>
   );
 };
