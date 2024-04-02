@@ -61,15 +61,40 @@ const fileUpload = require('express-fileupload');
 
 const wss = new WebSocket.Server({ server })
 
+let connectedUsers = []; // Maintain a list of connected users
+
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(data) {
+    const parsedData = JSON.parse(data);
+
+    if (parsedData.type === 'newUser') {
+      connectedUsers.push(parsedData.name); // Add new user to the list
+      broadcastUserList();
+    } else {
+      // Broadcast the message to all clients except the sender
+      wss.clients.forEach(function each(client) {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(data);
+        }
+      });
+    }
+  });
+
+  ws.on('close', function close() {
+    // Assuming you have a way to identify the user, e.g., by their name
+    connectedUsers = connectedUsers.filter(user => user !== ws.userName); // Update connected users list
+    broadcastUserList();
+  });
+
+  function broadcastUserList() {
+    const userListMessage = JSON.stringify({ type: 'userList', users: connectedUsers });
     wss.clients.forEach(function each(client) {
-      if (client !== ws && client.readyState === WebSocket.OPEN) {
-        client.send(data);
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(userListMessage);
       }
-    })
-  })
-})
+    });
+  }
+});
 
 app.use(fileUpload());
 app.use(express.static(__dirname + "/../client/dist"));
