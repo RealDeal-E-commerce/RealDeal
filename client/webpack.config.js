@@ -20,20 +20,20 @@ module.exports = {
           }
         }
       },
-      // Add this rule for handling image assets
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
+      },
+      // New rule for CSS files
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       }
     ]
   },
-  // If you're using React Router or other client-side routing,
-  // you might want to consider adding this to handle client-side navigation.
-  // It redirects all server requests to /index.html, letting React Router handle routing.
   devServer: {
     historyApiFallback: true,
   },
-  // Resolve .js and .jsx file extensions so you can leave them off when importing.
   resolve: {
     extensions: ['.js', '.jsx'],
   }

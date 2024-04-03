@@ -358,3 +358,22 @@ body {
 .btn-secondary:hover {
   background-color: #2a0045; /* Darker shade of purple on hover */
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .formContainer {
+    width: 90%;
+    padding: 10px;
+  }
+}
+/* In your CSS file */
+input:focus, textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.sendButton:hover {
+  background-color: #0056b3;
+}
+
+

@@ -6,8 +6,8 @@ module.exports = {
 
 getAll :async function(req,res){
     try {
-        const post= await db.Post.findAll({})
-        res.status(200).send(post)
+        const post= await db.Post.findAll({order: [ ['createdAt', 'DESC'] ]})
+         res.status(200).send(post)
         
     } catch (error) {
         throw error
