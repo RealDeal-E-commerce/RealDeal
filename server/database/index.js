@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Create a new Sequelize instance
-const sequelize = new Sequelize('commerce', 'root', 'rootroot', {
+const sequelize = new Sequelize('commerce', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql',
 });
@@ -54,24 +54,22 @@ const User = sequelize.define('user', {
     },
 });
 
-const Post=sequelize.define('post',{
+const Post = sequelize.define('post', {
+    FirstName: DataTypes.STRING,
+    LastName: DataTypes.STRING,
+    description: DataTypes.STRING,
+    picturePath: DataTypes.STRING,
+    userpicturePath: DataTypes.STRING,
+    likes: {
+        type: DataTypes.JSON,
+        defaultValue: {}
+    },
+    comment: {
+        type: DataTypes.JSON,
+        defaultValue: []
+    }
+});
 
-        FirstName:DataTypes.STRING,
-            
-        LastName:DataTypes.STRING,
-        description:DataTypes.STRING,
-        picturePath:DataTypes.STRING,
-        userpicturePath:DataTypes.STRING,
-        likes:{
-           type:Map,
-           of:Boolean
-        },
-        comment:{
-            type:DataTypes.JSON,
-            defaultValue:[]
-        }
-    
-})
 // Define the Product model
 const Product = sequelize.define('product', {
     name: {
@@ -167,6 +165,7 @@ Post.belongsTo(Admin);
 //     .catch((error) => {
 //         console.error('Unable to sync models with the database: ', error)
 //     });
+
  
 
 

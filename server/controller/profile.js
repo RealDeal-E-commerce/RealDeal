@@ -1,4 +1,4 @@
-const db = require("../models/profile");
+const db = require("../database/index");
 
 module.exports = {
 

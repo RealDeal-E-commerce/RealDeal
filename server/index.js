@@ -1,11 +1,9 @@
 const express = require("express");
-const Routes = require('./routes/item.routes')
-
+const Routes = require('./routes/profileRoutes')
+var cors = require('cors')
  
 require('./database/index');
 
-
-const ProfileRoutes = require("./routes/profileRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3001 
@@ -16,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/dist"));
 
-app.use("/api/",Routes);
+app.use("/api/fashion ",Routes);
 
 app.listen(PORT, function () {
   console.log("listening on port 3000!");
