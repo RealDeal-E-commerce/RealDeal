@@ -1,70 +1,60 @@
-import { ChatEngine } from 'react-chat-engine';
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+
+
+import ReactDOM from 'react-dom';
+import Homepage from './components/homepage.jsx'; // Note the correct import path
+
+
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+// import $ from 'jquery'
+// import List from './components/List.jsx'
+import Navbar from'./components/navbar.jsx'
+import Market from'./components/Market.jsx'
+import Userprofile from './components/Userprofile.jsx';
+import Editprofile from './components/Editprofile.jsx'
 import Login from "./components/login.jsx";
-import SignUp from "./components/singUp.jsx"; // Ensure the filename is correct. It should be "SignUp.jsx" if that's the component name.
-import Homepage from "./components/Homepage.jsx";
-import "../dist/style.css";
+import SignUp from "./components/singUp.jsx";
 import { io } from 'socket.io-client';
 import ChatComponent from './components/ChatComponent.jsx'
-import { data } from 'jquery';
-// const socket = io("http://localhost:3000" ,{ autoConnect: false }); // Make sure your backend is running on this port
-
+import Fashionshows from "./components/Fashionshows.jsx"
+import Upcomingshows from "./components/Upcomingshows.jsx"
+import Previousshows from "./components/Previousshows.jsx"
+import Allnft from './components/Allnft.jsx'
+import Explore from "./components/Explore.jsx"
+const socket = io("http://localhost:3000" ,{ autoConnect: false }); 
 const App = () => {
-  const [message, setMessage] = useState('');
-  const [messages, setMessages] = useState([]);
-  const [view, setView] = useState('login'); // Default view set to 'login' for initial state
-  const [user, setUser] = useState({});
+  
+  const [view, setView] = useState('login');
+ 
+ 
+  const [data, setData] = useState([]);
+  const [dataP, setDataP] = useState([]);
+  const [updated, setUpdated] = useState(false);
   const [error, setError] = useState('');
   const [isLogged, setIsLogged] = useState(false);
-  const [currentConversationId, setCurrentConversationId] = useState(null);
-const [data,setData]=useState({})
-  useEffect(() => {
-    // Listen for incoming messages only if logged in
-    // if (isLogged) {
-    //   socket.on('receiveMessage', (message) => {
-    //     setMessages(messages => [...messages, message]);
-    //   });
-
-    //   // Cleanup to avoid multiple listeners being attached on re-renders
-    //   return () => {
-    //     socket.off('receiveMessage');
-    //   };
-    // }
-  }, [isLogged]); // Dependency on isLogged to setup or remove socket listeners based on user's logged-in state
-
-  
-  
-  // Example function to select a conversation
-  const selectConversation = (conversationId) => {
-    setCurrentConversationId(conversationId);
-    // Optionally, fetch conversation messages using the conversationId
-    fetchMessagesForConversation(conversationId);
-  };
-  
-  const sendMessage = (e) => {
-    e.preventDefault();
-    if (!message || !currentConversationId) return;
-  
-    const messageData = {
-      conversationId: currentConversationId,
-      senderId: user.id, // Make sure this correctly references the user ID
-      content: message,
-    };
-  
-    // socket.emit('sendMessage', messageData);
-    // setMessage(''); // Clear message input after sending
-  };
-  // Example function to fetch messages for a conversation
-  const fetchMessagesForConversation = async (conversationId) => {
+  const [user, setUser] = useState({});
+  const fetch = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/chat/conversations/${conversationId}/messages`);
-      setMessages(response.data); // Assuming you have a state to store messages
+      const response = await axios.get("http://localhost:3000/api/product/");
+      setData(response.data);
     } catch (error) {
-      console.error("Failed to fetch messages:", error);
+      console.error('Error fetching data:', error);
     }
   };
+  
+  const fetchpost = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/api/post/");
+      setDataP(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  
+  const deletepost=(id)=>{
+    axios.delete(`http://localhost:3000/api/post/${id}`).then(()=> setUpdated(!updated)).catch((error)=>console.log(error))
+  }
   const singUp = (obj) => {
     axios.post('http://localhost:3000/api/user/register/', obj).then((res) => {
       console.log(res.data);
@@ -77,15 +67,15 @@ const [data,setData]=useState({})
     axios.post('http://localhost:3000/api/user/', obj)
     .then((res) => {
       const userData = res.data.user;
-      // const token = res.data.token;
+      const token = res.data.token;
   
       // Save the token and user ID to local storage
-      // const storedTokens = JSON.parse(localStorage.getItem('tokens')) || {};
-      // storedTokens[userData.id] = token;
-      // localStorage.setItem('tokens', JSON.stringify(storedTokens));
+      const storedTokens = JSON.parse(localStorage.getItem('tokens')) || {};
+      storedTokens[userData.id] = token;
+      localStorage.setItem('tokens', JSON.stringify(storedTokens));
   
         setIsLogged(true);
-        changeView('homepage', userData);
+        changeView('home', userData);
         setError('');
       })
       .catch((err) => {
@@ -94,9 +84,8 @@ const [data,setData]=useState({})
     };
     const changeView = (option, userData) => {
       setView(option);
-      if (option === 'homepage') {
-        setUser(userData); 
-        console.log(userData);
+      if (option === 'home') {
+        setUser(userData); // Assuming userData is the user object you want to set
       }
     };
     
@@ -105,10 +94,33 @@ const [data,setData]=useState({})
     setUser({});
     setView('login');
   };
-  const goToChatView = () => {
-    setView('chat');
-  };
 
+  const updateS=(id,obj)=>{
+    axios.put(`http://localhost:3000/api/user/${id}`,obj).then((res)=>{
+      console.log(res.data);
+      fetch()
+  })
+  }
+
+  useEffect(() => {
+    if (isLogged) {
+      socket.on('receiveMessage', (message) => {
+        setMessages(messages => [...messages, message]);
+      });
+      return () => {
+        socket.off('receiveMessage');
+      };
+    }
+   fetchpost();
+    fetch();
+   
+
+
+  }, [updated,isLogged]);
+ console.log(data)
+ 
+ console.log(dataP,'ääää')
+ 
   return (
     <div>
       {view === 'login' && (
@@ -117,14 +129,21 @@ const [data,setData]=useState({})
       {view === 'singup' && (
         <SignUp changeView={changeView} singUp={singUp} />
       )}
-      {view === 'homepage' && (
-        <div>
-          <Homepage user={user} />
-          <button onClick={goToChatView}>Go to Chat</button>
-        </div>
-      )}
-     {view === 'chat' && <ChatComponent user={user} />}
+
+        <Navbar user={user} changeView={changeView}/>
+        
+       {view=== 'home' && <Homepage user={user} />} {/* Pass user prop to the Homepage component */} 
+       {view=== 'Market' && <Market />} 
+       {view=== 'Userprofile' && <Userprofile user={user} changeView={changeView}  />} 
+       {view=== 'Editprofile' && <Editprofile user={user}  datap={dataP}   deletepost={deletepost} changeView={changeView} updateS={updateS}  />} 
+       {view === 'chat' && <ChatComponent user={user} />}
+       {view === 'Fashionshows' && <Fashionshows user={user} />}
+       {view === 'Upcomingshows' && <Upcomingshows user={user} />}
+       {view === 'Previousshows' && <Previousshows user={user} />}
+       {view === 'Allnft' && <Allnft user={user} />}
+       {view === 'Explore' && <Explore user={user} />}
     </div>
   );
-};
-ReactDOM.render(<App />, document.getElementById("root"));
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));

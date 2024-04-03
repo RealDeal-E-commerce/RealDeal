@@ -128,6 +128,7 @@ function signUp({ singUp, changeView }) {
                         )}
                     </Dropzone>
                     <button type="button" className="btn btn-secondary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'dark purple', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }} onClick={handleSignUp} >Sign Up</button>
+                    <button type="button" className="btn btn-secondary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'dark purple', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }} onClick={()=>{changeView('login')}} >Login</button>
                 </form>
             </div>
         </div>

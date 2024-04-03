@@ -1,9 +1,9 @@
 
 const express = require('express');
 const router = express.Router();
-const {register,login} = require('../controller/auth');
+const {register,login,UpdateS} = require('../controllers/auth');
 
-
+router.put('/:id', UpdateS);
 router.post('/', login);
 router.post('/register', register);
 

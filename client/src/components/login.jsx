@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Login = ({changeView,login,error}) => {
+const Login = ({error,changeView,login}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -24,7 +24,7 @@ const Login = ({changeView,login,error}) => {
     };
 
     return (
-        <div className="login-form" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '12px', marginTop: '-70px' }}>
+        <div className="login-form" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '135vh', fontSize: '12px', marginTop: '-70px' }}>
             <div>
                 <h2 style={{color:'white'}}>Login</h2>
                 <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ const Login = ({changeView,login,error}) => {
                         />
                     </div>
                     {error && <p style={{color:'red'}}>{error}</p>}
-                    <button type="submit" className="btn btn-primary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'purple', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }}>Login</button>
+                    <button  type="submit" className="btn btn-primary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'purple', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }}>Login</button>
                     <p style={{ fontSize: '16px', marginTop: '10px' }}>no account</p>
                     <button type="button" className="btn btn-secondary" style={{ marginTop: '10px', justifyContent: 'center', backgroundColor: 'purple', color: 'white', marginLeft: 'auto', marginRight: 'auto', display: 'block', border: 'none' }} onClick={handleSignUp}>Sign Up</button>
                 </form>
