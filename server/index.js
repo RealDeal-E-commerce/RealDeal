@@ -12,11 +12,12 @@ const allnftRoutes=require("./routes/allnft.routes")
 
 
 const app = express();
+app.use(express.json());
 const PORT = process.env.PORT || 3000
 const http = require('http');
 const server = http.createServer(app);
 
-app.use(express.json());
+
  const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ server })
@@ -39,6 +40,6 @@ app.use('/api/user', UserRoute);
 app.use("/api/explore", exploreRoutes);
 app.use("/api/allnft", allnftRoutes);
 
-app.listen(PORT, function () {
+server.listen(PORT, function () {
   console.log("listening on port 3000!");
 });
