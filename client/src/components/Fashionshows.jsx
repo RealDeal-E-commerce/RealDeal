@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { RiLiveLine } from 'react-icons/ri';
 import { SlPeople } from 'react-icons/sl';
 import axios from 'axios';
@@ -16,7 +16,6 @@ export default function Fashionshows() {
         console.error('Error fetching data:', error);
       }
     };
-
 
     fetchData();
   }, []);
@@ -68,7 +67,3 @@ export default function Fashionshows() {
     </>
   );
 }
-
-
-
-

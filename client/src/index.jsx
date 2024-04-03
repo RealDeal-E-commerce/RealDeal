@@ -41,6 +41,7 @@ const App = () => {
       console.error('Error fetching data:', error);
     }
   };
+  
   const fetchpost = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/post/");
@@ -49,9 +50,8 @@ const App = () => {
       console.error('Error fetching data:', error);
     }
   };
-  const addpost=(body)=>{
-    axios.post("http://localhost:3000/api/post/",body).then(()=> setUpdated(!updated)).catch((error)=>console.log(error))
-  }
+
+  
   const deletepost=(id)=>{
     axios.delete(`http://localhost:3000/api/post/${id}`).then(()=> setUpdated(!updated)).catch((error)=>console.log(error))
   }
@@ -107,19 +107,19 @@ const App = () => {
       socket.on('receiveMessage', (message) => {
         setMessages(messages => [...messages, message]);
       });
-
-      // Cleanup to avoid multiple listeners being attached on re-renders
       return () => {
         socket.off('receiveMessage');
       };
     }
-
+   fetchpost();
     fetch();
-    fetchpost();
+   
+
+
   }, [updated,isLogged]);
  console.log(data)
- console.log(dataP,'üüü')
-
+ 
+ console.log(dataP,'ääää')
  
   return (
     <div>
@@ -134,8 +134,8 @@ const App = () => {
         
        {view=== 'home' && <Homepage user={user} />} {/* Pass user prop to the Homepage component */} 
        {view=== 'Market' && <Market />} 
-       {view=== 'Userprofile' && <Userprofile user={user}  data={dataP} addpost={addpost} changeView={changeView}/>} 
-       {view=== 'Editprofile' && <Editprofile user={user}  data={dataP} deletepost={deletepost} changeView={changeView} updateS={updateS}/>} 
+       {view=== 'Userprofile' && <Userprofile user={user} changeView={changeView}  />} 
+       {view=== 'Editprofile' && <Editprofile user={user}  datap={dataP}   deletepost={deletepost} changeView={changeView} updateS={updateS}  />} 
        {view === 'chat' && <ChatComponent user={user} />}
        {view === 'Fashionshows' && <Fashionshows user={user} />}
        {view === 'Upcomingshows' && <Upcomingshows user={user} />}

@@ -1,177 +1,306 @@
-const { Sequelize, DataTypes } = require('sequelize');
+    const mysql = require('mysql2');
+    const { Sequelize, DataTypes } = require('sequelize');
 
-// Create a new Sequelize instance
-const sequelize = new Sequelize('commerce', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql',
-});
 
-// connection check :
-sequelize.authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully.')
+    // Create a new Sequelize instance
+    const sequelize = new Sequelize('blogs', 'root', 'root', {
+        host: 'localhost',
+        dialect: 'mysql',
+
+
+    });
+
+    async function connectionTest (){     
+        try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+        } catch (error) {
+        console.error('Unable to connect to the database:', error);
+        }
+        }
+        connectionTest()
+
+    // Define the User model
+    const User = sequelize.define('user', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        role: {
+            type: DataTypes.ENUM('client','fashionDesigner','admin'),
+            allowNull: false
+        },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
+    });
+
+
+
+    const Product = sequelize.define('product', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        price: {
+            type: DataTypes.FLOAT,
+            allowNull: false
+        },
+    
+        color: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: []
+        },
+        image: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        category: {
+            type: DataTypes.ENUM('Clothing', 'Art', 'Fashion'),
+            allowNull: false
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 1
+        },
+        brand: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        fashionDesigner: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
     })
-    .catch((error) => {
-        console.error('Unable to connect to the database: ', error)
-    })
+    const Cart = sequelize.define('cart', {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        price: {
+            type: DataTypes.FLOAT,
+            allowNull: false
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 1
+        }
+    });
+    const Conversation = sequelize.define('conversation', {
+        // You can add additional properties here, such as timestamps or conversation metadata
+    });
+    const Post = sequelize.define('post', {
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        image: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        }
+    
+    });
 
-// Define the User model
-const User = sequelize.define('user', {
-    FirstName:{
-        type:DataTypes.STRING,
-        allowNull: false
-    },
-    LastName:{
-        type:DataTypes.STRING,
-        
-        allowNull: false
-    },
-    Email:{
-        type:DataTypes.STRING,
+    const Message = sequelize.define('message', {
+        senderId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        receiverId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        content: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        }
+    });
+    const allnft = sequelize.define('nft', {
+        id: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-        unique:true,
-    },
-    Password:{
-        type:DataTypes.STRING,
-       
-        allowNull: false
-    },
-    Role: {
-        type: DataTypes.ENUM('Client', 'Fashion designer'),
-        allowNull: false
-    },
-    PicturePath:{
-        type:DataTypes.STRING,
-        defaultValue:"",
-    },
-    Followers:{
-        type:DataTypes.JSON,
-        defaultValue:[],
-    },
-    Date:{
-        type:DataTypes.JSON,
-        defaultValue:[],
-    },
-});
+        autoIncrement: true,
+        primaryKey: true
+        },
+        UncommenRare: {
+            type: DataTypes.INTEGER,
+            allowNull :false,
+        },
+        price: {
+                type: DataTypes.INTEGER,
+                
+            },
+        
+        imgUrl: {
+            type: DataTypes.STRING,
+            allowNull :false
+        },
+        genre: {
+        type: DataTypes.STRING,
+        
+        },
+        status: {
+            type: DataTypes.STRING,
+            
+        },
+        comingSoon: {
+            type: DataTypes.STRING,
+            
+        },
+    });
+    
+    const explore = sequelize.define('exp', {
+        id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+        },
+        imgP: {
+            type: DataTypes.STRING,
+            allowNull :false,
+        },
+        name: {
+                type: DataTypes.STRING,
+                
+            },
+        
+        imgB: {
+            type: DataTypes.STRING,
+            allowNull :false
+        },
+        description: {
+        type: DataTypes.STRING,
+        
+        },
+    });
 
-const Post = sequelize.define('post', {
-    FirstName: DataTypes.STRING,
-    LastName: DataTypes.STRING,
-    description: DataTypes.STRING,
-    picturePath: DataTypes.STRING,
-    userpicturePath: DataTypes.STRING,
-    likes: {
-        type: DataTypes.JSON,
-        defaultValue: {}
-    },
-    comment: {
-        type: DataTypes.JSON,
-        defaultValue: []
-    }
-});
-
-// Define the Product model
-const Product = sequelize.define('product', {
-    name: {
+    const shows = sequelize.define('shows', {
+        id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+        },
+        time: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    description: {
+        },
+        showing: {
+        type: DataTypes.STRING,
+        
+        },
+        imgUrl: {
+        type: DataTypes.STRING,
+        allowNull :false
+        },
+
+    });
+
+    /// comments
+
+    const Comment = sequelize.define('Comment', {
+        id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+        },
+        
+        content: {
         type: DataTypes.TEXT,
         allowNull: false
-    },
-    price: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-  
-    color: {
-        type: DataTypes.JSON,
-        allowNull: false,
-        defaultValue: []
-    },
-    sizes: {
-        type: DataTypes.JSON,
-        allowNull: false,
-        defaultValue: []
-    },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    gender: {
-        type: DataTypes.ENUM('men', 'women', 'kids'),
-        allowNull: false
-    },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1
-    },
-    brand: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+        },
+
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+            model: User, 
+            key: 'id'    
+            }
+        },
+        
+        postId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+            model: Post, 
+            key: 'id'    
+            }
+        }
     
-});
+    });
 
 
-const Cart = sequelize.define('cart', {
-    name: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    image: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    price: {
-        type: DataTypes.FLOAT,
-        allowNull: false
-    },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1
-    }
-});
-const Admin = sequelize.define('admin', {
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    User.belongsToMany(User, { as: 'participants', through: Conversation });
+    Conversation.hasMany(Message);
+    Message.belongsTo(Conversation);
+    Message.belongsTo(User);
+    User.hasMany(Product);
+    Product.belongsTo(User);
+    User.hasOne(Cart);
+    Cart.belongsTo(User);
+    User.hasMany(Post);
+    Post.belongsTo(User);
+
+
+    //// comments 
+    Comment.belongsTo(User, { foreignKey: 'userId', as: 'author' });
+    Comment.belongsTo(Post, { foreignKey: 'postId', as: 'post' });     
+
+
+    User.hasMany(Comment, { foreignKey: 'userId', as: 'comments' }); 
+    Post.hasMany(Comment, { foreignKey: 'postId', as: 'comments' }); 
+
+
     
-});
-
-// Establish the association between User and Product
-
-User.hasOne(Cart);
-Cart.belongsTo(User);
-User.hasMany(Post);
-Post.belongsTo(User);
-Admin.hasMany(Post);
-Post.belongsTo(Admin);
-
-// Sync the models with the database
-// sequelize.sync({ force: true })
-//     .then(() => {
-//         console.log('Models synced with the database.')
-//     })
-//     .catch((error) => {
-//         console.error('Unable to sync models with the database: ', error)
-//     });
-
- 
 
 
-module.exports.Product=Product;
-module.exports.User=User;
-module.exports.Cart=Cart;
-module.exports.Post=Post;
-module.exports.Admin=Admin;
+
+    //   const db={}
+
+    // db.Products=require('./Fashionshows.model')(connection,DataTypes)
+
+
+    // sequelize.sync({force:true}) 
+
+
+    module.exports.Product=Product;
+    module.exports.User=User;
+    module.exports.Cart=Cart;
+    module.exports.sequelize=sequelize;
+    module.exports.Conversation=Conversation
+    module.exports.Message=Message
+    module.exports.Post=Post
+    module.exports.Allnft=allnft
+    module.exports.explore=explore
+    module.exports.shows=shows
+    module.exports.Comment=Comment
+
+
 

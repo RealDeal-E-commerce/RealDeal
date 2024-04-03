@@ -1,5 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 88999eabfdf028ca716c9e84e0b6198a6a0d4e4b
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -98,7 +101,10 @@
 .messages::-webkit-scrollbar-thumb {
   background: #555;
 }
+<<<<<<< HEAD
 >>>>>>> e511bd6de1189febcf2c3653611ea76b5037a346
+=======
+>>>>>>> 88999eabfdf028ca716c9e84e0b6198a6a0d4e4b
 
 
 body {
@@ -211,7 +217,10 @@ body {
 
   
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 88999eabfdf028ca716c9e84e0b6198a6a0d4e4b
 .dropdown {
   float: left;
   overflow: hidden;
@@ -363,4 +372,26 @@ body {
 .btn-secondary:hover {
   background-color: #2a0045; /* Darker shade of purple on hover */
 }
+<<<<<<< HEAD
 >>>>>>> e511bd6de1189febcf2c3653611ea76b5037a346
+=======
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .formContainer {
+    width: 90%;
+    padding: 10px;
+  }
+}
+/* In your CSS file */
+input:focus, textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+.sendButton:hover {
+  background-color: #0056b3;
+}
+
+
+>>>>>>> 88999eabfdf028ca716c9e84e0b6198a6a0d4e4b
