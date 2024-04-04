@@ -7,6 +7,7 @@ const postRoutes=require("./routes/post")
 const UserRoute=require('./routes/user.routes')
 const exploreRoutes=require("./routes/explore.routes")
 const allnftRoutes=require("./routes/allnft.routes")
+
 const CommentRoutes=require("./routes/commentRoutes")
 
 
