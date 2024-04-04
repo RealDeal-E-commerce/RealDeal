@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import { Link } from 'react-router-dom';
 import Market from'./Market.jsx'
-const Navbar = ({ user ,changeView}) => {
+const Navbar = ({ user ,changeView,setNftt,setObjj}) => {
    console.log(user);
    console.log(changeView);
    
@@ -30,7 +30,7 @@ const Navbar = ({ user ,changeView}) => {
                         <a href="#">About Us</a>
                         <a href="#">Community</a>
                         <a onClick={() => changeView('Allnft')}>ALL NFT</a>
-                        <a onClick={() => changeView('Userprofile')}>Edit Profile</a>
+                        <a onClick={() => changeView('Userprofile')}>User Profile</a>
                         <a href="#">Setting</a>
                        </div>
                     </div>
@@ -39,8 +39,8 @@ const Navbar = ({ user ,changeView}) => {
                 <div className="navbar-end">
                     <div className="navbar-item"> 
                         <div className="control">
-                            <input className="input" type="text" placeholder="Search..." />
-                            <button className="button is-primary">Search</button>
+                            <input className="input" type="text" placeholder="Search..." onChange={(e)=>setObjj(e.target.value)}/>
+                            <button className="navbar-item" onClick={() => setNftt(true) }>Search</button>
                         </div>
                     </div>
                 </div>

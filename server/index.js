@@ -7,7 +7,7 @@ const postRoutes=require("./routes/post")
 const UserRoute=require('./routes/user.routes')
 const exploreRoutes=require("./routes/explore.routes")
 const allnftRoutes=require("./routes/allnft.routes")
-
+const paymentRoutes=require('./routes/payment.routes')
 
 
 
@@ -39,6 +39,7 @@ app.use('/api/post', postRoutes);
 app.use('/api/user', UserRoute);
 app.use("/api/explore", exploreRoutes);
 app.use("/api/allnft", allnftRoutes);
+app.use("/api/payment", paymentRoutes);
 
 server.listen(PORT, function () {
   console.log("listening on port 3000!");

@@ -21,6 +21,7 @@ import Upcomingshows from "./components/Upcomingshows.jsx"
 import Previousshows from "./components/Previousshows.jsx"
 import Allnft from './components/Allnft.jsx'
 import Explore from "./components/Explore.jsx"
+import Payment from './components/Payment.jsx'
 const socket = io("http://localhost:3000" ,{ autoConnect: false }); 
 const App = () => {
   
@@ -33,6 +34,8 @@ const App = () => {
   const [error, setError] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState({});
+  const [nftt,setNftt]=useState(false)
+  const [objj,setObjj]=useState("")
   const fetch = async () => {
     try {
       const response = await axios.get("http://localhost:3000/api/product/");
@@ -120,6 +123,8 @@ const App = () => {
  console.log(data)
  
  console.log(dataP,'ääää')
+
+
  
   return (
     <div>
@@ -130,17 +135,19 @@ const App = () => {
         <SignUp changeView={changeView} singUp={singUp} />
       )}
 
-        <Navbar user={user} changeView={changeView}/>
+        <Navbar user={user} changeView={changeView} setNftt={setNftt} setObjj={setObjj} />
         
        {view=== 'home' && <Homepage user={user} />} {/* Pass user prop to the Homepage component */} 
        {view=== 'Market' && <Market />} 
        {view=== 'Userprofile' && <Userprofile user={user} changeView={changeView}  />} 
-       {view=== 'Editprofile' && <Editprofile user={user}  datap={dataP}   deletepost={deletepost} changeView={changeView} updateS={updateS}  />} 
+       
        {view === 'chat' && <ChatComponent user={user} />}
        {view === 'Fashionshows' && <Fashionshows user={user} />}
        {view === 'Upcomingshows' && <Upcomingshows user={user} />}
        {view === 'Previousshows' && <Previousshows user={user} />}
-       {view === 'Allnft' && <Allnft user={user} />}
+       {view === 'Allnft' && <Allnft changeView={changeView} nftt={nftt} objj={objj} setNftt={setNftt}/>}
+       {view === 'Payment' && <Payment />}
+       
        {view === 'Explore' && <Explore user={user} />}
     </div>
   );
