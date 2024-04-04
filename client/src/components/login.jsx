@@ -24,7 +24,7 @@ const Login = ({error,changeView,login}) => {
     };
 
     return (
-        <div className="login-form" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '135vh', fontSize: '12px', marginTop: '-70px' }}>
+        <div className="login-form" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '170vh', fontSize: '12px', marginTop: '-70px' }}>
             <div>
                 <h2 style={{color:'white'}}>Login</h2>
                 <form onSubmit={handleSubmit}>

@@ -1,20 +1,36 @@
 import React, { useState,useEffect } from 'react';
 import FooTer from './footer.jsx';
 import { FaHeart } from 'react-icons/fa';
-
+import axios from 'axios';
 import Dropzone from 'react-dropzone';
 
-function Editprofile({user,datap,deletepost,changeView,updateS}) {
+function Editprofile({user,changeView}) {
    
-    // const [dataP, setDataP] = useState(datap);
+    const [datap, setDatap] = useState([]);
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setname] = useState('');
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
-
+    const [updated,setUpdated]=useState(false)
+    const fetchpost = async () => {
+        try {
+          const response = await axios.get("http://localhost:3000/api/post/");
+          setDatap(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+      const deletepost=(id)=>{
+        axios.delete(`http://localhost:3000/api/post/${id}`).then(()=> setUpdated(!updated)).catch((error)=>console.log(error))
+      }
+      const updateS=(id,obj)=>{
+        axios.put(`http://localhost:3000/api/user/${id}`,obj).then((res)=>{
+          console.log(res.data);
+          fetch()
+      })
+      }
     
 
     const handleUpdate =  () => {
@@ -42,18 +58,34 @@ function Editprofile({user,datap,deletepost,changeView,updateS}) {
       newData[index].liked = !newData[index].liked; 
       
     };
+    useEffect(()=>{fetchpost()},[updated])
     
     console.log(datap,'üüü')
 return (
   <div>
   <div style={{ display:'flex',justifyContent:'center',alignItems:'center',height: '100vh',flexDirection:'column'}}>
-    <div  style={{ width: '60%',height: '400px',overflow: 'hidden'}}>
-      <img src="https://s3-alpha-sig.figma.com/img/6262/ff08/c2cdd4f8b04caadb548542f98fd4c2f2?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=DOAOhAg0Ls~jm6UiqYYpjq-R92qnBZTxoF~2GvJJFPLfDK9YQCNJMId19aT2V6diniTTRJY4aGYoxX5cL7d7D5rWSRE5akp8goFZeSDaCMKAsCKRKfghlMXE1ayO9b6Wgd-Q9ofUfFyQdyMKF5BFKmdtv~fLWQDtUcebaLLVGnJNHCNiNZpWzPXhpC2JNAXUH2xQK0ZGOf07mxeGiaUN5ioTw5RZ1KJMDV1c~0PYlQEU3milLZqB1-dCjUosG112o0iFxsQ~vSSFk~hz-oKyY8aPXqxkgm1kNRxbBE49RBEAvr6IoeLvqaT8qPYp4JHqnXgzltuFhBqhCsyua9UMQw__" alt="Description" style={{ 
-        width: '100%', 
-        height: '100%', 
-        objectFit: 'cover' 
-      }} />
-    </div>
+  <div style={{
+  width: '60%',
+  height: '400px',
+  overflow: 'hidden',
+  position: 'relative',
+  borderRadius: '10px', // Adds rounded corners
+  boxShadow: '0 4px 8px rgba(0,0,0,0.2)', // Subtle shadow for depth
+  margin: '20px auto', // Centers the container and adds vertical spacing
+}}>
+  <img 
+    src="https://e0.pxfuel.com/wallpapers/295/317/desktop-wallpaper-fashion-industry-fashion-clothes.jpg" 
+    alt="Description" 
+    style={{
+      width: '100%', 
+      height: '100%', 
+      objectFit: 'cover',
+      transition: 'transform 0.5s ease', // Smooth transition for zoom effect
+    }}
+    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'} // Zoom in
+    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} // Zoom out to original scale
+  />
+  </div>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
     <div style={{ display: 'flex', alignItems: 'center' }}>
 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight: '10px' }}>

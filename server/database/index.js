@@ -221,6 +221,8 @@ const allnft = sequelize.define('nft', {
     },
   });
 
+  
+
 
 User.belongsToMany(User, { as: 'participants', through: Conversation });
 Conversation.hasMany(Message);

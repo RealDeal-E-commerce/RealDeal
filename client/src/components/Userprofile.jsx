@@ -18,6 +18,9 @@ function Userprofile({user,changeView}) {
     const addpost=(body)=>{
       axios.post("http://localhost:3000/api/post/",body).then(()=> setUpdatee(!updatee)).catch((error)=>console.log(error))
     }
+    const deletepost=(id)=>{
+      axios.delete(`http://localhost:3000/api/post/${id}`).then(()=> setUpdatee(!updatee)).catch((error)=>console.log(error))
+    }
 
     const toggleLike = (index) => {
         const newData = [...dataP]; // Copy the data array
@@ -27,8 +30,12 @@ function Userprofile({user,changeView}) {
       const [title,setTitle]=useState('')
       const [content,setContent]=useState('')
       const [image,setImage]=useState('')
+      const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
+      const [name, setname] = useState('');
 
       const [isModalOpen, setIsModalOpen] = useState(false);
+      const [isModalOpen1, setIsModalOpen1] = useState(false);
       const handleAddPost = async ({ title, content, image }) => {
         try {
             const newPost = await addpost({ title, content, image });
@@ -42,34 +49,162 @@ function Userprofile({user,changeView}) {
             console.error("Error adding post:", error);
         }
     };
+    const handleDelete=(id)=>{
+      deletepost(id)
+     
+  }
+  const updateS=(id,obj)=>{
+    axios.put(`http://localhost:3000/api/user/${id}`,obj).then(()=> setUpdatee(!updatee))
+  }
+  const handleUpdate =  () => {
+    updateS(user.id,{
+    email: email !== '' ? email : user.email,
+    password: password !== '' ? password : user.password,
+    name: name !== '' ? name : user.name,
+    });
+
+    
+    setEmail('');
+    setPassword('');
+    setname('');
+    setIsModalOpen1(false);
+   
+
+};
+
   
 useEffect(()=>{fetchpost()},[updatee])
     console.log(dataP,'zzz');
   return (
     <div>
     <div style={{ display:'flex',justifyContent:'center',alignItems:'center',height: '100vh',flexDirection:'column'}}>
-      <div  style={{ width: '60%',height: '400px',overflow: 'hidden'}}>
-        <img src="https://s3-alpha-sig.figma.com/img/6262/ff08/c2cdd4f8b04caadb548542f98fd4c2f2?Expires=1712534400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=DOAOhAg0Ls~jm6UiqYYpjq-R92qnBZTxoF~2GvJJFPLfDK9YQCNJMId19aT2V6diniTTRJY4aGYoxX5cL7d7D5rWSRE5akp8goFZeSDaCMKAsCKRKfghlMXE1ayO9b6Wgd-Q9ofUfFyQdyMKF5BFKmdtv~fLWQDtUcebaLLVGnJNHCNiNZpWzPXhpC2JNAXUH2xQK0ZGOf07mxeGiaUN5ioTw5RZ1KJMDV1c~0PYlQEU3milLZqB1-dCjUosG112o0iFxsQ~vSSFk~hz-oKyY8aPXqxkgm1kNRxbBE49RBEAvr6IoeLvqaT8qPYp4JHqnXgzltuFhBqhCsyua9UMQw__" alt="Description" style={{ 
-          width: '100%', 
-          height: '100%', 
-          objectFit: 'cover' 
-        }} />
-      </div>
+    <div style={{
+  width: '60%',
+  height: '400px',
+  overflow: 'hidden',
+  position: 'relative',
+  borderRadius: '10px', 
+  boxShadow: '0 4px 8px rgba(0,0,0,0.2)', 
+  margin: '20px auto', 
+}}>
+  <img 
+    src="https://e0.pxfuel.com/wallpapers/295/317/desktop-wallpaper-fashion-industry-fashion-clothes.jpg" 
+    alt="Description" 
+    style={{
+      width: '100%', 
+      height: '100%', 
+      objectFit: 'cover',
+      transition: 'transform 0.5s ease', 
+    }}
+    onMouseOver={e => e.currentTarget.style.transform = 'scale(1.05)'} 
+    onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'} 
+  />
+  </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center' }}>
   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginRight: '10px' }}>
     <img src={user.image} alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
     <p style={{ margin: '5px 0 0 0' }}>{user.name}</p>
   </div>
-  <button onClick={() => changeView('Editprofile')} style={{
-    border: 'none', 
-    backgroundColor: '#007bff',
-    color: 'white',
-    cursor: 'pointer',
-    padding: '5px 10px',
-  }}>
-    Edit Profile
-  </button>
+  <div>
+  <button onClick={() => setIsModalOpen1(true)} style={{
+      padding: '10px 20px',
+      borderRadius: '5px',
+      border: 'none',
+      backgroundColor: '#007bff',
+      color: 'white',
+      cursor: 'pointer',
+    }}>Edit ur Profile</button>
+    
+    {isModalOpen1 && (
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+      }}>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          padding: '20px',
+          borderRadius: '10px',
+          backgroundColor: 'white',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.2)',
+          width: '80%',
+          maxWidth: '500px',
+        }}>
+          <h1 style={{ color: '#1A202C' }}>Update</h1>
+          <input
+            type="text"
+            placeholder='Email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+              outline: 'none',
+              marginBottom: '10px',
+            }}
+          />
+          <textarea
+            placeholder='Password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+              outline: 'none',
+              resize: 'vertical',
+              minHeight: '100px',
+              marginBottom: '10px',
+            }}
+          />
+          <input
+            type="text"
+            value={name}
+            placeholder='name'
+            onChange={(e) => setname(e.target.value)}
+            style={{
+              padding: '10px',
+              borderRadius: '5px',
+              border: '1px solid #ccc',
+              outline: 'none',
+              marginBottom: '10px',
+            }}
+          />
+          <button
+            onClick={() =>{ handleUpdate(),setIsModalOpen1(false)}}
+            style={{
+              padding: '10px 20px',
+              borderRadius: '5px',
+              border: 'none',
+              backgroundColor: '#007bff',
+              color: 'white',
+              cursor: 'pointer',
+            }}
+          >
+            Update
+          </button>
+          <button onClick={() => setIsModalOpen1(false)} style={{
+            padding: '10px 20px',
+            borderRadius: '5px',
+            border: 'none',
+            backgroundColor: 'grey',
+            color: 'white',
+            cursor: 'pointer',
+            marginTop: '10px',
+          }}>Close</button>
+        </div>
+      </div>
+    )}
+</div>
 </div>
                 
             </div>
@@ -210,7 +345,7 @@ useEffect(()=>{fetchpost()},[updatee])
     <img src="https://s3-alpha-sig.figma.com/img/4ad1/3da1/9f1a3acb99705180fbfbfaf3214cf901?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=LxkXtBnGbIr-DRr5PONuc2Ub9OEylmNwvXjsU2Bp0YZWweHUgnK7x1qzeNuuX8CTAYPK449r~yWoCINFtNpWVRyzMCAwGlY4Gpn7rw07h2lUSrGlUwbgfyuxx5kDP05iNsm6fMd8orT0cctf-i8qf5h~p-a8wgcdCPI4~SBBiLvE5WG9NBaWJSNzcZ1hdzxf3ukbmm4jbqO8NSJjR4i1MZPTR0W3pDxRFG8ya4Qlz~E0OQj1dJ3svGDd5MiEbYJCpl~y0Cxm1S4PMDeDeigr9KdXspDMHFQvMf-b7RW3HqPCsPrpTZ63rIfoY0xlufpkBAl4W~ehkrS8vsFcd4t~LQ__" alt="Gallery Image 2" style={{ width: '100px', height: '100px', objectFit: 'cover' , borderRadius: '5px'}}  />
     {/* Add more images as needed */}
   </div> 
-
+  
   {/* Existing Content Container */}
   <div style={{
     display: 'flex',
@@ -275,7 +410,10 @@ useEffect(()=>{fetchpost()},[updatee])
     e.target.style.borderColor = '#E2E8F0'; // Reverts the border color on blur
     e.target.style.boxShadow = 'inset 0 2px 4px rgba(0,0,0,0.1)'; // Reverts the shadow on blur
   }}
+  
 />
+<br />
+<button  onClick={()=>{handleDelete(post.id)}} style={{border: 'none', backgroundColor: '#007bff',color: 'white',cursor: 'pointer', }}>delete</button>
 
           
         
