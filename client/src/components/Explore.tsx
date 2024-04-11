@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import style from "../css/Explore.css";
+import  '../css/Explore.css';
 
-export default function Explore() {
-  const [explore, setExplore] = useState([]);
+interface ExploreItem {
+  name:string;
+  imgP:string; 
+  imgB:string; 
+  description:string;
+}
+
+const Explore: React.FC = () => {
+  const [explore, setExplore] = useState<ExploreItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/explore/");
+        const response = await axios.get<ExploreItem[]>(
+          "http://localhost:3000/api/explore/"
+        );
         setExplore(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -39,8 +48,8 @@ export default function Explore() {
         <button className="button">Creators</button>
         <button className="button">Brands</button>
       </div>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <div className="container">
         {explore.map((item, index) => (
           <div className="item" key={index}>
@@ -59,3 +68,5 @@ export default function Explore() {
     </div>
   );
 }
+
+export default Explore;

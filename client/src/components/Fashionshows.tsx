@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { RiLiveLine } from 'react-icons/ri';
+import { SlPeople } from 'react-icons/sl';
 import axios from 'axios';
-import style from "../css/Fashionshows.css";
+import './Fashionshows.css';
 
-export default function Allnft() {
-  const [fashionshows, setFashionshows] = useState([]);
+interface FashionShow {
+  id:number;
+  time:string;
+  imgUrl:string;
+  showing:string;
+}
+
+const Fashionshows:React.FC = ()=> {
+  const [fashionshows,setFashionshows]= useState<FashionShow[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData=async ()=> {
       try {
-        const response = await axios.get("http://localhost:3000/api/product/");
+        const response = await axios.get<FashionShow[]>(
+          "http://localhost:3000/api/shows/"
+        );
         setFashionshows(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -20,10 +31,10 @@ export default function Allnft() {
 
   return (
     <>
-     <div className="button-container">
-  <button className="button1">Established Brands</button>
-  <button className="button2">Emerging Brands</button>
-</div>
+      <div className="button-container">
+        <button className="button1">Established Brands</button>
+        <button className="button2">Emerging Brands</button>
+      </div>
 
       <div className="container">
         <h2 className="title">Fashion Shows</h2>
@@ -33,17 +44,19 @@ export default function Allnft() {
         <br />
         <br />
         <div className="row">
-          <h1 className="live-now">Live Now</h1>
-
           {fashionshows.map((fashionshow) => (
             <div key={fashionshow.id} className="col-md-4 mb-4">
               <div className="card h-100">
                 <div className="card-body">
                   <p className="card-text">{fashionshow.time}</p>
                   <div className="image-container">
-                    <img src="https://i.ibb.co/MNxwc0p/Frame-70.jpg" className="live" alt="" />
-                    <img src="https://i.ibb.co/NnRxXP2/Frame-74.jpg" className="people" alt="Fashion Show" />
-                    <img src={fashionshow.imgUrl} className="card-img-top" alt="Fashion Show" />
+                    <RiLiveLine className="live-icon" style={{ color: 'red' }} />
+                    <SlPeople className="people-icon" style={{ color: 'purple' }} />
+                    <img
+                      src={fashionshow.imgUrl}
+                      className="card-img-top"
+                      alt="Fashion Show"
+                    />
                   </div>
                   <br />
                   <br />
@@ -51,7 +64,7 @@ export default function Allnft() {
                   <h5 className="card-title">
                     <span className="badge">
                       <div className="logo-wrapper">
-                        <img className='zalandologo' src="https://www.gooddata.com/img/resources/_1200x630/Zalando.png" alt="img" />
+                        <img className='zalandologo' src="https://www.gooddata.com/img/resources/_1200x630/Zalando.png" alt="Zalando" />
                       </div>
                     </span>
                     {fashionshow.showing}
@@ -65,4 +78,6 @@ export default function Allnft() {
       </div>
     </>
   );
-}
+};
+
+export default Fashionshows;

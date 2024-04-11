@@ -156,6 +156,16 @@ body {
   height: auto;
   object-fit: cover;
 }
+.live-icon {
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+
+}
 
 .card-img-top {
   width: calc(100%);
@@ -198,4 +208,14 @@ body {
 
 .button-container {
   text-align: center;
+}
+
+.people-icon {
+  position: absolute;
+  top: 0;
+  right: 200px;
+  width: 40px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 50%;
 }
